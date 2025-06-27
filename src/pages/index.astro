@@ -60,7 +60,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<main>
 			<h1>Office Activation Commands</h1>
 			<p>
-				Below are the commands to activate Office Professional Plus 2016. Run these in an administrator command prompt.
+				https://kms.netnr.eu.org/
 			</p>
 			
 			<h2>Activation Script</h2>
@@ -68,6 +68,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			<div class="code-wrapper">
 				<button class="copy-button" id="copy-btn">Copy</button>
 				<pre id="code-block"><code>
+cd C:\Program Files\Microsoft Office\Office16
 for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
