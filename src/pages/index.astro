@@ -9,33 +9,46 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			/* 添加一点样式让代码块更好看 */
+			main {
+				margin: auto;
+				padding: 1.5rem;
+				max-width: 60ch;
+			}
+			pre {
+				background-color: #f4f4f4; /* 浅灰色背景 */
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 1em;
+				overflow-x: auto; /* 如果代码过长，可以横向滚动 */
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.9em;
+				white-space: pre-wrap;       /* 自动换行 */
+    		word-wrap: break-word;     /* 强制断词 */
+			}
+			code {
+				color: #333; /* 深灰色文字 */
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+			<h1>Office Activation Commands</h1>
+			<p>
+				Below are the commands to activate Office Professional Plus 2016. Run these in an administrator command prompt.
+			</p>
+			
+			<h2>Activation Script</h2>
+			<pre><code>for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
+cscript ospp.vbs /sethst:kms.jihuowin.com && cscript ospp.vbs /act</code></pre>
 
-                        <p>
-                                <li>office365 激活命令<li>
-                                
-                                <li><code>for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"<code><li>
-                                <li><code>for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"<code><li>
-                                <li><code>cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99<code><li>
-                                <li><code>cscript ospp.vbs /sethst:kms.jihuowin.com && cscript ospp.vbs /act<code><li>
-                                
-                              
-                         
-                        </p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-
-
+			<p>
+				Please use these scripts responsibly and ensure you are compliant with software licensing agreements.
+			</p>
 		</main>
 		<Footer />
 	</body>
