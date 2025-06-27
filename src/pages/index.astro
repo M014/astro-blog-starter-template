@@ -10,25 +10,48 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			/* 添加一点样式让代码块更好看 */
 			main {
 				margin: auto;
 				padding: 1.5rem;
 				max-width: 60ch;
 			}
+			/* 包裹代码块和按钮的容器，用于定位 */
+			.code-wrapper {
+				position: relative;
+				margin-top: 1.5em;
+			}
 			pre {
-				background-color: #f4f4f4; /* 浅灰色背景 */
+				background-color: #f4f4f4;
 				border: 1px solid #ddd;
-				border-radius: 4px;
+				border-radius: 8px; /* 圆角稍大一点更好看 */
 				padding: 1em;
-				overflow-x: auto; /* 如果代码过长，可以横向滚动 */
+				overflow-x: auto;
 				font-family: 'Courier New', Courier, monospace;
 				font-size: 0.9em;
-				white-space: pre-wrap;       /* 自动换行 */
-    		word-wrap: break-word;     /* 强制断词 */
+				white-space: pre;
 			}
 			code {
-				color: #333; /* 深灰色文字 */
+				color: #333;
+			}
+			/* 复制按钮的样式 */
+			.copy-button {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				background-color: #e0e0e0;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				padding: 4px 8px;
+				font-size: 0.8em;
+				cursor: pointer;
+				transition: background-color 0.2s;
+			}
+			.copy-button:hover {
+				background-color: #d0d0d0;
+			}
+			.copy-button.copied {
+				background-color: #a3e635; /* 复制成功后变绿色 */
+				color: #1a2e05;
 			}
 		</style>
 	</head>
@@ -41,15 +64,46 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</p>
 			
 			<h2>Activation Script</h2>
-			<pre><code>for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+
+			<div class="code-wrapper">
+				<button class="copy-button" id="copy-btn">Copy</button>
+				<pre id="code-block"><code>
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
 cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
-cscript ospp.vbs /sethst:kms.jihuowin.com && cscript ospp.vbs /act</code></pre>
+cscript ospp.vbs /sethst:kms.jihuowin.com && cscript ospp.vbs /act
+				</code></pre>
+			</div>
 
 			<p>
 				Please use these scripts responsibly and ensure you are compliant with software licensing agreements.
 			</p>
 		</main>
 		<Footer />
+
+		<script>
+			const copyButton = document.getElementById('copy-btn');
+			const codeBlock = document.getElementById('code-block');
+
+			copyButton.addEventListener('click', async () => {
+				const codeToCopy = codeBlock.innerText.trim();
+				try {
+					await navigator.clipboard.writeText(codeToCopy);
+					
+					// 提供视觉反馈
+					copyButton.textContent = 'Copied!';
+					copyButton.classList.add('copied');
+
+					setTimeout(() => {
+						copyButton.textContent = 'Copy';
+						copyButton.classList.remove('copied');
+					}, 2000); // 2秒后恢复原状
+
+				} catch (err) {
+					console.error('Failed to copy text: ', err);
+					copyButton.textContent = 'Error';
+				}
+			});
+		</script>
 	</body>
 </html>
